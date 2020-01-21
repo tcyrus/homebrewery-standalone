@@ -1,10 +1,8 @@
 # The Homebrewery (headless)
 
-The Homebrewery is a tool for making authentic looking [D&D content](https://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook) using only [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet). Check it out [here](https://homebrewery.naturalcrit.com).
+The Homebrewery is a tool for making authentic looking [D&D content](https://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook) using only [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
-## How Does It Worked
-
-This uses a trimmed-down version of Homebrewery and then uses [puppeteer](https://pptr.dev/) to make PDF's from the command line.
+This is a trimmed-down version of Homebrewery combined with [puppeteer](https://pptr.dev/) to make PDF's from the command line.
 
 ## License
 
