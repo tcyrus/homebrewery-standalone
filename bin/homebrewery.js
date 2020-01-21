@@ -39,16 +39,16 @@ const Layout = {
 };
 
 (async () => {
-	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
 
-	await page.setContent(render.sync(Layout));
+  await page.setContent(render.sync(Layout));
 
   await lessCss.then(css => page.addStyleTag({ content: css }));
 
   await page.emulateMedia('screen');
 
-	await page.pdf({ path: outputFn });
+  await page.pdf({ path: outputFn });
 
-	await browser.close();
+  await browser.close();
 })();
