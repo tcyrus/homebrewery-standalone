@@ -21,7 +21,8 @@ const [inputFn, outputFn] = process.argv.slice(2, 4);
 // Start Less Rendering in the Background
 const lessCss = fs.promises.readFile('./client/homebrew/phbStyle/phb.style.less', 'utf8')
     .then(data => less.render(data, { compress: true }))
-    .then(output => output.css);
+    .then(output => output.css)
+    .catch(console.error);
 
 const Layout = {
   oninit(node) {

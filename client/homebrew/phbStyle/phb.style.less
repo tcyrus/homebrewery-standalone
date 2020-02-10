@@ -4,43 +4,45 @@
 @import (less) './client/homebrew/phbStyle/phb.depricated.less';
 
 // Colors
-@background            : #EEE5CE;
-@noteGreen             : #e0e5c1;
-@headerUnderline       : #c9ad6a;
-@horizontalRule        : #9c2b1b;
-@headerText            : #58180D;
-@monsterStatBackground : #FDF1DC;
+@background: #eee5ce;
+@noteGreen: #e0e5c1;
+@headerUnderline: #c9ad6a;
+@horizontalRule: #9c2b1b;
+@headerText: #58180d;
+@monsterStatBackground: #fdf1dc;
 @page { margin: 0; }
+
 body {
-	counter-reset : phb-page-numbers;
+	counter-reset: phb-page-numbers;
 }
+
 * {
-	-webkit-print-color-adjust : exact;
+	-webkit-print-color-adjust: exact;
 }
+
 .useSansSerif() {
-	font-family : ScalySans;
+	font-family: ScalySans;
 	em {
-		font-family : ScalySans;
-		font-style  : italic;
+		font-family: ScalySans;
+		font-style: italic;
 	}
 	strong {
-		font-family    : ScalySans;
-		font-weight    : 800;
-		letter-spacing : -0.02em;
+		font-family: ScalySans;
+		font-weight: 800;
+		letter-spacing: -0.02em;
 	}
 }
-.useColumns(@multiplier : 1) {
-	column-count         : 2;
-	column-fill          : auto;
-	column-gap           : 1cm;
-	column-width         : 8cm * @multiplier;
-	-webkit-column-count : 2;
-	-moz-column-count    : 2;
-	-webkit-column-width : 8cm * @multiplier;
-	-moz-column-width    : 8cm * @multiplier;
-	-webkit-column-gap   : 1cm;
-	-moz-column-gap      : 1cm;
+
+.useColumns(@multiplier: 1) {
+	column-count: 2;
+	-webkit-column-count: 2;
+	column-fill: auto;
+	column-gap: 1cm;
+	-webkit-column-gap: 1cm;
+	column-width: 8cm * @multiplier;
+	-webkit-column-width: 8cm * @multiplier;
 }
+
 .phb {
 	.useColumns();
 	counter-increment : phb-page-numbers;
@@ -63,10 +65,10 @@ body {
 	// *            BASE
 	// *****************************/
 	p {
-		padding-bottom : 0.8em;
-		line-height    : 1.3em;
+		padding-bottom: 0.8em;
+		line-height: 1.3em;
 		& + p {
-			margin-top : -0.8em;
+			margin-top: -0.8em;
 		}
 	}
 	ul {
@@ -84,13 +86,13 @@ body {
 		list-style-type     : decimal;
 	}
 	// Indents after p or lists
-	p + p,
-	ul + p,
-	ol + p {
-		text-indent : 1em;
+	p, ul, ol {
+		& + p {
+			text-indent: 1em;
+		}
 	}
 	img {
-		z-index : -1;
+		z-index: -1;
 	}
 	strong {
 		font-weight    : bold;
@@ -122,12 +124,11 @@ body {
 		font-weight   : 800;
 		color         : @headerText;
 	}
-	h1{
+	h1 {
 		column-span         : all;
-		font-size           : 0.987cm;
 		-webkit-column-span : all;
-		-moz-column-span    : all;
-		&+p::first-letter{
+		font-size           : 0.987cm;
+		& + p::first-letter {
 			float       : left;
 			font-family : Solberry;
 			font-size   : 10em;
@@ -135,18 +136,18 @@ body {
 			line-height : 0.8em;
 		}
 	}
-	h2{
+	h2 {
 		font-size : 0.705cm;
 	}
-	h3{
+	h3 {
 		font-size     : 0.529cm;
 		border-bottom : 2px solid @headerUnderline;
 	}
-	h4{
-		margin-bottom : 0.00em;
-		font-size     : 0.458cm;
+	h4 {
+		margin-bottom: 0;
+		font-size: 0.458cm;
 	}
-	h5{
+	h5 {
 		margin-bottom : 0.2em;
 		font-family   : ScalySansSmallCaps;
 		font-size     : 0.423cm;
@@ -173,10 +174,10 @@ body {
 		tbody {
 			tr {
 				td {
-					padding : 0.3em 0.1em;
+					padding: 0.3em 0.1em;
 				}
 				&:nth-child(odd) {
-					background-color : @noteGreen;
+					background-color: @noteGreen;
 				}
 			}
 		}
@@ -200,14 +201,16 @@ body {
 			line-height : 1.1em;
 		}
 	}
-	//If a note starts a column, give it space at the top to render border
-	pre+blockquote, h2+blockquote, h3+blockquote, h4+blockquote, h5+blockquote {
-		margin-top : 13px;
+	// If a note starts a column, give it space at the top to render border
+	pre, h2, h3, h4, h5 {
+		& + blockquote {
+			margin-top: 13px;
+		}
 	}
 	//*****************************
 	// *    MONSTER STAT BLOCK
 	// *****************************/
-	hr+blockquote{
+	hr + blockquote {
 		position         : relative;
 		padding-top      : 15px;
 		background-color : @monsterStatBackground;
@@ -215,40 +218,41 @@ body {
 		border-width     : 10px;
 		border-image     : @monsterBorderImage 10;
 		h2 {
-			margin-top    : -8px;
-			margin-bottom : 0;
+			margin-top: -8px;
+			margin-bottom: 0;
 			& + p {
-				padding-bottom : 0;
+				padding-bottom: 0;
 			}
 		}
-		h3{
-			font-family   : ScalySans;
-			font-weight   : 400;
-			border-bottom : 1px solid @headerText;
+		h3 {
+			font-family: ScalySans;
+			font-weight: 400;
+			border-bottom: 1px solid @headerText;
 		}
-		hr+ul{
-			color : @headerText;
+		hr + ul {
+			color: @headerText;
 		}
-		ul{
+		ul {
 			.useSansSerif();
-			padding-left : 1em;
-			font-size    : 0.352cm;
+			padding-left: 1em;
+			font-size: 0.352cm;
 		}
 		// Monster Ability table
-		hr+table{
+		hr + table {
 			margin              : 0;
 			column-span         : 1;
 			background-color    : transparent;
 			border-style        : none;
 			border-image        : none;
 			-webkit-column-span : 1;
-			tbody{
-				tr:nth-child(odd), tr:nth-child(even){
-					background-color : transparent;
+			tbody {
+				tr:nth-child(odd),
+				tr:nth-child(even) {
+					background-color: transparent;
 				}
 			}
 		}
-		table{
+		table {
 			color : @headerText;
 		}
 		p + p {
@@ -273,7 +277,7 @@ body {
 	//*****************************
 	// *           FOOTER
 	// *****************************/
-	&:after{
+	&:after {
 		content          : "";
 		position         : absolute;
 		bottom           : 0;
@@ -286,14 +290,14 @@ body {
 	}
 	&:nth-child(even) {
 		&:after {
-			transform : scaleX(-1);
+			transform: scaleX(-1);
 		}
 		.pageNumber {
-			left : 2px;
+			left: 2px;
 		}
 		.footnote {
-			left       : 80px;
-			text-align : left;
+			left: 80px;
+			text-align: left;
 		}
 	}
 	.pageNumber {
@@ -322,10 +326,10 @@ body {
 	// *          EXTRAS
 	// *****************************/
 	hr {
-		visibility : hidden;
-		margin     : 0;
+		visibility: hidden;
+		margin: 0;
 	}
-	//Modified unorder list, used in spells
+	// Modified unorder list, used in spells
 	hr + ul {
 		margin-bottom   : 0.5em;
 		padding-left    : 1em;
@@ -335,16 +339,15 @@ body {
 	// Column Break
 	pre, code {
 		visibility                 : hidden;
-		-webkit-column-break-after : always;
 		break-after                : always;
-		-moz-column-break-after    : always;
+		-webkit-column-break-after : always;
 	}
 	// Avoid breaking up
 	p, blockquote, table {
 		z-index                     : 15;
-		-webkit-column-break-inside : avoid;
 		page-break-inside           : avoid;
 		break-inside                : avoid;
+		-webkit-column-break-inside : avoid;
 		overflow: hidden; /* Firefox fix */
 	}
 	// Better spacing for spell blocks
@@ -360,8 +363,8 @@ body {
 	ol ol,
 	ul ol,
 	ol ul {
-		margin-bottom : 0;
-		margin-left   : 1.5em;
+		margin-bottom: 0;
+		margin-left: 1.5em;
 	}
 	li {
 		-webkit-column-break-inside : avoid;
@@ -377,15 +380,14 @@ body {
 	column-count        : 4;
 	column-span         : all;
 	-webkit-column-span : all;
-	-moz-column-span    : all;
-	ul + h5 {
-		margin-top : 15px;
-	}
 	p, ul {
 		font-size   : 0.352cm;
 		line-height : 1.3em;
 	}
 	ul {
+		& + h5 {
+			margin-top: 15px;
+		}
 		margin-bottom               : 0.5em;
 		padding-left                : 1em;
 		text-indent                 : -1em;
@@ -399,9 +401,8 @@ body {
 // *         WIDE
 // *****************************/
 .phb .wide {
-	column-span         : all;
-	-webkit-column-span : all;
-	-moz-column-span    : all;
+	column-span: all;
+	-webkit-column-span: all;
 }
 //*****************************
 // *       CLASS TABLE
@@ -418,7 +419,7 @@ body {
 	border-image-slice  : 150 200 150 200;
 	border-image-source : @frameBorderImage;
 	border-image-width  : 47px;
-	h5{
+	h5 {
 		margin-bottom : 10px;
 	}
 }
@@ -439,9 +440,9 @@ body {
 		display        : block;
 		padding-bottom : 0;
 		line-height    : 1.5em;
-	}
-	p + p {
-		padding-top : 0.8em;
+		& + p {
+			padding-top : 0.8em;
+		}
 	}
 	em {
 		font-family : ScalySans;
@@ -460,7 +461,6 @@ body {
 // *      TABLE OF CONTENTS
 // *****************************/
 .phb .toc {
-	-webkit-column-break-inside : avoid;
 	page-break-inside           : avoid;
 	break-inside                : avoid;
 	a {
