@@ -1,25 +1,25 @@
 /* Main Font */
 @font-face {
 	font-family: BookSanity;
-	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity.otf') format('opentype');
+	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 @font-face {
 	font-family: BookSanity;
-	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-bold.otf') format('opentype');
+	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-bold.woff2') format('woff2');
 	font-weight: bold;
 	font-style: normal;
 }
 @font-face {
 	font-family: BookSanity;
-	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-italic.otf') format('opentype');
+	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-italic.woff2') format('woff2');
 	font-weight: normal;
 	font-style: italic;
 }
 @font-face {
 	font-family: BookSanity;
-	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-bold-italic.otf') format('opentype');
+	src: data-uri('./client/homebrew/phbStyle/fonts/BookSanity-bold-italic.woff2') format('woff2');
 	font-weight: bold;
 	font-style: italic;
 }
