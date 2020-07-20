@@ -11,12 +11,28 @@ const less = require('less'),
 
 const Markdown = require('../shared/naturalcrit/markdown.js');
 
-if (process.argv.length !== 4) {
-  console.error('Expected two arguments!');
+const { Command } = require('commander');
+const program = new Command();
+
+program
+  .version('0.0.1')
+  .arguments('<inputFile> <outputFile>')
+  .option('--layout <type>', 'Set page layout', 'Letter');
+
+program.parse(process.argv);
+
+if (!program.args.length) {
+  program.help();
   process.exit(1);
 }
 
-const [inputFn, outputFn] = process.argv.slice(2, 4);
+const [inputFile, outputFile] = program.args;
+const {layout} = program;
+
+if (!(['Letter', 'A4'].includes(layout))) {
+  program.help();
+  process.exit(1);
+}
 
 // Start Less Rendering in the Background
 const lessCss = fs.promises.readFile('./client/homebrew/phbStyle/phb.style.less', 'utf8')
@@ -26,13 +42,13 @@ const lessCss = fs.promises.readFile('./client/homebrew/phbStyle/phb.style.less'
 
 const Layout = {
   oninit(node) {
-    node.state.bText = fs.readFileSync(inputFn, 'utf8');
+    node.state.bText = fs.readFileSync(inputFile, 'utf8');
   },
   view(node) {
     return m('div.homebrew',
       m('div',
         node.state.bText.split('\\page').map((page, idx) =>
-          m('div.phb', { id: `p${idx + 1}` }, m.trust(Markdown.render(page)))
+          m('div.phb', { id: `p${idx + 1}`, 'page-layout': layout }, m.trust(Markdown.render(page)))
         )
       )
     );
@@ -49,7 +65,7 @@ const Layout = {
 
   await page.emulateMedia('screen');
 
-  await page.pdf({ path: outputFn });
+  await page.pdf({ path: outputFile, format: layout });
 
   await browser.close();
 })();

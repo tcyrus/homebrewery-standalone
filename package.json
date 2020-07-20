@@ -5,6 +5,7 @@
   "author": "tcyrus",
   "license": "MIT",
   "dependencies": {
+    "commander": "^6.0.0",
     "less": "^3.11.3",
     "marked": "^0.7.0",
     "mithril": "^2.0.4",
@@ -14,7 +15,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "homebrewery-standalone": "node bin/homebrewery.js"
+    "hb": "node bin/homebrewery.js"
   },
   "bin": {
     "homebrewery-standalone": "bin/homebrewery.js"
