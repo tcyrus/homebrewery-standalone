@@ -4,7 +4,7 @@
 
 This is a trimmed-down version of Homebrewery that uses [Mithril.js](https://mithril.js.org/) (instead of React) and [puppeteer](https://pptr.dev/) to make PDF files.
 
-# Quick Start
+## Quick Start
 
 This will be updated eventually with more information.
 
