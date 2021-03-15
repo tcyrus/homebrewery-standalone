@@ -30,4 +30,4 @@ jobs:
       - uses: actions/checkout@v2
 
       - run: npm install
-      - run: npm run hb -- README.md output/result.pdf
+      - run: npm run hb -- README.md README.pdf
