@@ -31,3 +31,9 @@ jobs:
 
       - run: npm install
       - run: npm run hb -- README.md README.pdf
+      
+      
+      - uses: actions/upload-artifact@main
+        with:
+          name: myartifact
+          path: output/result.pdf
