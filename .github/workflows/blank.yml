@@ -35,5 +35,5 @@ jobs:
       
       - uses: actions/upload-artifact@main
         with:
-          name: myartifact
-          path: output/result.pdf
+          name: readmeartifact
+          path: README.pdf
