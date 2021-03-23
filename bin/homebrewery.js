@@ -9,7 +9,10 @@ const less = require('less'),
       render = require('mithril-node-render'),
       puppeteer = require('puppeteer');
 
+const MarkdownLegacy = require('../shared/naturalcrit/markdownLegacy.js');
 const Markdown = require('../shared/naturalcrit/markdown.js');
+
+const brew_renderer = 'legacy';
 
 const { Command } = require('commander');
 const program = new Command();
@@ -35,7 +38,8 @@ if (!(['Letter', 'A4'].includes(layout))) {
 }
 
 // Start Less Rendering in the Background
-const lessCss = fs.promises.readFile('./client/homebrew/phbStyle/phb.style.less', 'utf8')
+const lessFilepath = (brew_renderer === 'legacy') ? './client/homebrew/phbStyle/phb.styleLegacy.less' : './client/homebrew/phbStyle/phb.style.less';
+const lessCss = fs.promises.readFile(lessFilepath, 'utf8')
     .then(data => less.render(data, { compress: true }))
     .then(output => output.css)
     .catch(console.error);
@@ -47,9 +51,13 @@ const Layout = {
   view(node) {
     return m('div.homebrew',
       m('div',
-        node.state.bText.split('\\page').map((page, idx) =>
-          m('div.phb', { id: `p${idx + 1}`, 'page-layout': layout }, m.trust(Markdown.render(page)))
-        )
+        (brew_renderer === 'legacy') ?
+          node.state.bText.split('\\page').map((page, idx) =>
+            m('div.phb', { id: `p${idx + 1}`, 'page-layout': layout }, m.trust(MarkdownLegacy.render(page)))
+          ) :
+          node.state.bText.split(/^\\page/gm).map((page, idx) =>
+            m('div.phb3', { id: `p${idx + 1}`, 'page-layout': layout }, m.trust(Markdown.render(page)))
+          )
       )
     );
   }
