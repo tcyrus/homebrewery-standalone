@@ -2,17 +2,18 @@
   "name": "homebrewery-standalone",
   "description": "Create authentic looking D&D homebrews using only markdown",
   "version": "0.0.1",
+  "private": true,
   "author": "tcyrus",
   "license": "MIT",
   "dependencies": {
-    "commander": "^6.0.0",
-    "less": "^3.11.3",
-    "marked": "npm:marked@^1.2.7",
+    "commander": "^7.2.0",
+    "less": "^4.1.1",
+    "marked": "npm:marked@^2.0.3",
     "markedLegacy": "npm:marked@^0.3.19",
     "mithril": "^2.0.4",
-    "mithril-node-render": "^3.0.0",
-    "puppeteer": "^2.0.0",
-    "puppeteer-core": "^2.0.0"
+    "mithril-node-render": "^3.0.1",
+    "puppeteer": "^9.0.0",
+    "puppeteer-core": "^9.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

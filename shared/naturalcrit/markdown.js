@@ -61,7 +61,7 @@ renderer.text = function(text) {
             const block = matches[matchIndex] ? matches[matchIndex].trimLeft() : '';
             if (block && block.startsWith('{{')) {
                 const values = processStyleTags(block.substring(2));
-                r.push(`<span class="inline-block ${values}>`);
+                r.push(`<span class="inline-block ${values}">`);
                 blockCount++;
             } else if (block === '}}' && blockCount !== 0) {
                 r.push('</span>');
@@ -81,7 +81,7 @@ renderer.text = function(text) {
 };
 
 // Fix local links in the Preview iFrame to link inside the frame
-renderer.link = function (href, title, text) {
+renderer.link = function(href, title, text) {
     let self = false;
     if (href[0] === '#') {
         self = true;
@@ -91,6 +91,7 @@ renderer.link = function (href, title, text) {
     if (href === null) {
         return text;
     }
+
     let out = `<a href="${escape(href)}"`;
     if (title) {
         out += ` title="${title}"`;
@@ -99,6 +100,7 @@ renderer.link = function (href, title, text) {
         out += ' target="_self"';
     }
     out += `>${text}</a>`;
+
     return out;
 };
 
@@ -113,7 +115,7 @@ const cleanUrl = function (sanitize, _base, href) {
         } catch (_e) {
             return null;
         }
-        if (prot.indexOf('javascript:') === 0 || prot.indexOf('vbscript:') === 0 || prot.indexOf('data:') === 0) {
+        if (['javascript:', 'vbscript:', 'data:'].every(v => prot.startsWith(v))) {
             return null;
         }
     }
@@ -156,24 +158,11 @@ const sanatizeScriptTags = content =>
         .replace(/<\/script>/ig, '&lt;/script&gt;');
 
 
-function lodash_remove(array, predicate) {
-    var result = [];
-    if (!(array && array.length)) {
-        return result;
-    }
-    var index = -1,
-        indexes = [],
-        length = array.length;
-
-    predicate = getIteratee(predicate, 3);
-    while (++index < length) {
-        var value = array[index];
-        if (predicate(value, index, array)) {
-            result.push(value);
-            indexes.push(index);
-        }
-    }
-    basePullAt(array, indexes);
+// https://youmightnotneed.com/lodash/#remove
+const lodash_remove = (array, iteratee) => {
+    const toRemove = [];
+    const result = array.filter((item, i) => iteratee(item) && toRemove.push(i));
+    toRemove.reverse().forEach(i => array.splice(i, 1));
     return result;
 }
 
@@ -184,7 +173,7 @@ const processStyleTags = string => {
 
     const id      = lodash_remove(tags, tag => tag.startsWith('#')).map(tag => tag.slice(1))[0];
     const classes = lodash_remove(tags, tag => !tag.includes('"'));
-    const styles  = tags.map((tag)=>tag.replace(/="(.*)"/g, ':$1;'));
+    const styles  = tags.map(tag => tag.replace(/="(.*)"/g, ':$1;'));
     return `${classes.join(' ')}" ${id ? `id="${id}"` : ''} ${styles ? `style="${styles.join(' ')}"` : ''}`;
 };
 
@@ -192,7 +181,7 @@ module.exports = {
     marked: Markdown,
     render: rawBrewText => {
         blockCount = 0;
-        rawBrewText = rawBrewText.replace(/^\\column/gm, `<div class='columnSplit'></div>`)
+        rawBrewText = rawBrewText.replace(/^\\column/gm, "<div class='columnSplit'></div>")
                                  .replace(/^}}/gm, '\n}}')
                                  .replace(/^({{[^\n]*)$/gm, '$1\n');
         return Markdown(
