@@ -1,5 +1,7 @@
 # Homebrewery (standalone)
 
+**NOTE**: This is project isn't receiving any updates. See [here](https://github.com/tcyrus/homebrewery-standalone/issues/8#issuecomment-1379759786).
+
 [Homebrewery](https://github.com/naturalcrit/homebrewery) is a tool for making authentic looking [D&D content](https://dnd.wizards.com/products/tabletop-games/rpg-products/rpg_playershandbook) using only [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 This is a trimmed-down version of Homebrewery that uses [Mithril.js](https://mithril.js.org/) (instead of React) and [puppeteer](https://pptr.dev/) to make PDF files.
